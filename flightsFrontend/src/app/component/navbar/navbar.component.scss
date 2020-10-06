@@ -1,5 +1,4 @@
 .example-form {
-
     width: 100%;
   }
   
@@ -12,6 +11,14 @@
   }
   .example-spacer {
     flex: 1 1 auto;
+  }
+
+  .example-section {
+    margin: 12px 0;
+  }
+  
+  .example-margin {
+    margin: 0 12px;
   }
 
   .input {

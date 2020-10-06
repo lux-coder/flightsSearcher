@@ -26,6 +26,11 @@ interface Currency {
   viewValue: string;
 }
 
+interface TravelClass {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -54,6 +59,13 @@ export class NavbarComponent implements OnInit {
     {value: "HRK", viewValue: "HRK"}
   ];
 
+  travelClass: TravelClass[] = [
+    {value: "ECONOMY", viewValue: "Economy Class"},
+    {value: "PREMIUM_ECONOMY", viewValue: "Premium Economy Class"},
+    {value: "BUSINESS", viewValue: "Business Class"},
+    {value: "FIRST", viewValue: "First Class"}
+  ];
+
   flightsForm = new FormGroup({
     originLocation: new FormControl(),
     destinationLocation: new FormControl(),
@@ -61,7 +73,9 @@ export class NavbarComponent implements OnInit {
     returnDate: new FormControl(),
     adults: new FormControl(),
     children: new FormControl(),
-    currency: new FormControl()
+    currency: new FormControl(),
+    travelClass: new FormControl(),
+    nonStop: new FormControl()
   })
 
   airportsDep: Observable<Airport[]>;
@@ -83,7 +97,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("submited");
-  }
+    console.log(this.flightsForm.value);
+    }
 
 }
