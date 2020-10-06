@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material/material.module';
 
@@ -7,6 +8,8 @@ import { AppComponent } from './app.component';
 import { FlightComponent } from './component/flight/flight.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { HomeComponent } from './component/home/home.component';
+
+import { Form, ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -21,6 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,    
+    BrowserAnimationsModule,
     HttpClientModule
   ],
   providers: [],

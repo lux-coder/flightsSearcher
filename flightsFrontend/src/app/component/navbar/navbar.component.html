@@ -1,1 +1,83 @@
-<p>navbar works!</p>
+<form class="example-form" [formGroup]="flightsForm" (ngSubmit)="onSubmit()">
+
+    <mat-toolbar color="primary">
+
+        <mat-toolbar-row class="input">
+
+            <mat-label>Flying from
+                <mat-icon aria-hidden="false" aria-label="Example home icon">flight_takeoff</mat-icon>
+            </mat-label>
+
+            <input type="text" placeholder="Search for a airport" [formControl]="flightsForm.controls.originLocation"
+                [matAutocomplete]="auto1">
+            <mat-autocomplete #auto1="matAutocomplete">
+                <mat-option *ngFor="let airportD of airportsDep | async" [value]="airportD">
+                    {{airportD}}
+                </mat-option>
+            </mat-autocomplete>
+
+
+            <mat-label>Flying to
+                <mat-icon aria-hidden="false" aria-label="Example home icon">flight_land</mat-icon>
+            </mat-label>
+            <input type="text" placeholder="Search for a airport"
+                [formControl]="flightsForm.controls.destinationLocation" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let airportA of airportsArr | async" [value]="airportA">
+                    {{airportA}}
+                </mat-option>
+            </mat-autocomplete>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Departure date"
+                    [formControl]="flightsForm.controls.departureDate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker2" placeholder="Return date"
+                    [formControl]="flightsForm.controls.returnDate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Adults</mat-label>
+                <mat-select [formControl]="flightsForm.controls.adults">
+                    <mat-option *ngFor="let adult of adults" [value]="adult.value">
+                        {{adult.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Children</mat-label>
+                <mat-select [formControl]="flightsForm.controls.children">
+                    <mat-option *ngFor="let child of children" [value]="child.value">
+                        {{child.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+
+
+        </mat-toolbar-row>
+
+        <mat-toolbar-row class="input" style="margin-top: 20px; padding-bottom: 100px;">
+            
+            <mat-form-field style="width: 20%;">
+                <mat-label>Currency</mat-label>
+                <mat-select [formControl]="flightsForm.controls.currency">
+                    <mat-option *ngFor="let current of currency" [value]="current.value">
+                        {{current.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-button type="submit" style="border: solid;">Submit</button>
+        </mat-toolbar-row>
+
+    </mat-toolbar>
+</form>

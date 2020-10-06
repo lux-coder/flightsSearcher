@@ -44,7 +44,7 @@ const materialModules = [
   MatChipsModule,
   MatDividerModule,
   MatExpansionModule,
-  MatIconModule,
+  MatIconModule,  
   MatInputModule,
   MatListModule,
   MatMenuModule,

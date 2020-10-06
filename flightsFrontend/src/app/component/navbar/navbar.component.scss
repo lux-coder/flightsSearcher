@@ -1,0 +1,31 @@
+.example-form {
+
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .example-icon {
+    padding: 0 14px;
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .input {
+      padding-top: 20px;
+      display: grid;
+      grid-auto-flow: column;
+      grid-column-gap: 10px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .next-row {
+      padding-top: 100px;
+  }
