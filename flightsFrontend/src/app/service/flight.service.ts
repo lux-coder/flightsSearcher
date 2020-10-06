@@ -1,14 +1,18 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subject, BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ServerConstant } from '../constant/server-constant';
 import { Flight } from '../model/flight';
+import { FlightData } from '../model/flightData/flight-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlightService {
+
+  private apiData = new BehaviorSubject<FlightData[]>(null);
+  public apiData$ = this.apiData.asObservable();
 
 
   private _reqOptionsArgs = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
@@ -33,6 +37,12 @@ export class FlightService {
     //return this.http.post<Flight>(this.BASE_URL + 'fetchFlights', fly, this._reqOptionsArgs);
     return this.http.post<any>(this.host + '/api/flights/fetchFlights', fly, this._reqOptionsArgs);
 
+  }
+
+  setData(data) { 
+    console.log("from service again");
+    console.log(data);
+    this.apiData.next(data);
   }
 
 }

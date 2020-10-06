@@ -39,31 +39,31 @@ interface TravelClass {
 export class NavbarComponent implements OnInit {
 
   adults: Adult[] = [
-    {value: 1, viewValue: 1},
-    {value: 2, viewValue: 2},
-    {value: 3, viewValue: 3},
-    {value: 4, viewValue: 4},
-    {value: 5, viewValue: 5},
-    {value: 6, viewValue: 6}
+    { value: 1, viewValue: 1 },
+    { value: 2, viewValue: 2 },
+    { value: 3, viewValue: 3 },
+    { value: 4, viewValue: 4 },
+    { value: 5, viewValue: 5 },
+    { value: 6, viewValue: 6 }
   ];
 
   children: Children[] = [
-    {value: 1, viewValue: 1},
-    {value: 2, viewValue: 2},
-    {value: 3, viewValue: 3}
+    { value: 1, viewValue: 1 },
+    { value: 2, viewValue: 2 },
+    { value: 3, viewValue: 3 }
   ];
 
   currency: Currency[] = [
-    {value: "EUR", viewValue: "EUR"},
-    {value: "USD", viewValue: "USD"},
-    {value: "HRK", viewValue: "HRK"}
+    { value: "EUR", viewValue: "EUR" },
+    { value: "USD", viewValue: "USD" },
+    { value: "HRK", viewValue: "HRK" }
   ];
 
   travelClass: TravelClass[] = [
-    {value: "ECONOMY", viewValue: "Economy Class"},
-    {value: "PREMIUM_ECONOMY", viewValue: "Premium Economy Class"},
-    {value: "BUSINESS", viewValue: "Business Class"},
-    {value: "FIRST", viewValue: "First Class"}
+    { value: "ECONOMY", viewValue: "Economy Class" },
+    { value: "PREMIUM_ECONOMY", viewValue: "Premium Economy Class" },
+    { value: "BUSINESS", viewValue: "Business Class" },
+    { value: "FIRST", viewValue: "First Class" }
   ];
 
   flightsForm = new FormGroup({
@@ -86,10 +86,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     //    this.airports = this.airportControl.valueChanges.pipe(
-     this.airportsDep = this.flightsForm.controls.originLocation.valueChanges.pipe(
+    this.airportsDep = this.flightsForm.controls.originLocation.valueChanges.pipe(
       debounceTime(400),
       switchMap(iata => this.airportService.searchAirport(iata))
-    ); 
+    );
     this.airportsArr = this.flightsForm.controls.destinationLocation.valueChanges.pipe(
       debounceTime(400),
       switchMap(iata => this.airportService.searchAirport(iata))
@@ -98,6 +98,18 @@ export class NavbarComponent implements OnInit {
 
   onSubmit() {
     console.log(this.flightsForm.value);
-    }
+
+    this.flightService.searchFlights(this.flightsForm.value).subscribe(res => {
+      this.flightService.setData(res);
+      console.log(res);
+    });
+  }
+
+  /*     this.dataService.fetchData()
+    .subscribe(data => {
+      this.data = data;
+      // set data in service which is to be shared
+      this.dataService.setData(data)
+    }) */
 
 }
