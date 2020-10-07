@@ -1,21 +1,87 @@
-
-<mat-card class="example-card" *ngFor="let card of obs | async">
-    <mat-card-header>
-        <div>{{card.id}}</div>
-        <mat-card-title>Departure</mat-card-title>
-        <mat-card-subtitle>{{card.itineraries[0].segments[0].departure.at}}</mat-card-subtitle>
-        <mat-card-subtitle>{{card.itineraries[0].segments[0].duration}}</mat-card-subtitle>
-        <mat-card-title>Arrival</mat-card-title>
-        <mat-card-subtitle>{{card.itineraries[0].segments[0].arrival.at}}</mat-card-subtitle>
-        <mat-card-subtitle>{{card.itineraries[0].segments[0].arrival.terminal}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-        <mat-card-content>
-            <p>Price</p>
-            <p>{{card.price.total}}</p>
-            <p>{{card.price.currency}}</p>
-            <button mat-button>LIKE</button>
-        </mat-card-content>
-    </mat-card-actions>
-</mat-card>
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+<div class="center">
+    <mat-card class="example-card" *ngFor="let card of obs | async">
+        <div>{{card.id}}</div>
+        <mat-card-header>
+            <mat-card-title>Departure</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Departure Airport</th>
+                        <th scope="col">Departure Time</th>
+                        <th scope="col">Flight Duration</th>
+                        <th scope="col">Terminal</th>
+                        <th scope="col">Arrival Airport</th>
+                        <th scope="col">Arrival Time</th>
+                        <th scope="col">Number of stops</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{card.itineraries[0].segments[0].departure.iataCode}}</td>
+                        <td>{{card.itineraries[0].segments[0].departure.at}}</td>
+                        <td>{{card.itineraries[0].segments[0].duration}}</td>
+                        <td>{{card.itineraries[0].segments[0].arrival.terminal}}</td>
+                        <td>{{card.itineraries[0].segments[0].arrival.iataCode}}</td>
+                        <td>{{card.itineraries[0].segments[0].arrival.at}}</td>
+                        <td>{{card.itineraries[0].segments[0].numberOfStops}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </mat-card-content>
+
+        <ng-container *ngIf="card.itineraries.length > 1">
+            <mat-divider></mat-divider>
+            <mat-card-header>
+                <mat-card-title style="margin-top: 12px;">Return</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Departure Airport</th>
+                            <th scope="col">Departure Time</th>
+                            <th scope="col">Flight Duration</th>
+                            <th scope="col">Terminal</th>
+                            <th scope="col">Arrival Airport</th>
+                            <th scope="col">Arrival Time</th>
+                            <th scope="col">Number of stops</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{card.itineraries[1].segments[0].departure.iataCode}}</td>
+                            <td>{{card.itineraries[1].segments[0].departure.at}}</td>
+                            <td>{{card.itineraries[1].segments[0].duration}}</td>
+                            <td>{{card.itineraries[1].segments[0].arrival.terminal}}</td>
+                            <td>{{card.itineraries[1].segments[0].arrival.iataCode}}</td>
+                            <td>{{card.itineraries[1].segments[0].arrival.at}}</td>
+                            <td>{{card.itineraries[1].segments[0].numberOfStops}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </mat-card-content>
+        </ng-container>
+        <mat-divider></mat-divider>
+        <mat-card-header>
+            <mat-card-title style="margin-top: 12px;">Price</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+            <h3> {{card.price.total}} {{card.price.currency}}</h3>
+
+            <mat-card-actions class="actions">
+                <div></div>
+                <div>
+                    <button mat-raised-button color="primary" class="large">Book flight</button>
+                </div>
+            </mat-card-actions>
+
+        </mat-card-content>
+
+    </mat-card>
+</div>

@@ -84,8 +84,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private airportService: AirportService, private flightService: FlightService) { }
 
-  ngOnInit() {
-    //    this.airports = this.airportControl.valueChanges.pipe(
+  ngOnInit() {    
     this.airportsDep = this.flightsForm.controls.originLocation.valueChanges.pipe(
       debounceTime(400),
       switchMap(iata => this.airportService.searchAirport(iata))
@@ -97,19 +96,9 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.flightsForm.value);
-
     this.flightService.searchFlights(this.flightsForm.value).subscribe(res => {
       this.flightService.setData(res);
       console.log(res);
     });
   }
-
-  /*     this.dataService.fetchData()
-    .subscribe(data => {
-      this.data = data;
-      // set data in service which is to be shared
-      this.dataService.setData(data)
-    }) */
-
 }

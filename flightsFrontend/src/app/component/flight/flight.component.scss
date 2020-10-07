@@ -1,0 +1,34 @@
+.example-card {
+    width: 80%;
+    border: solid;
+    margin: 20px;
+}
+
+.inline {
+    display: flex;
+    flex-direction: inherit;
+    align-items: baseline;
+    background-color: aliceblue;
+}
+
+.sub {
+    display: block;
+    padding: 10px;
+}
+
+.center {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.large {
+    width: 200px;
+    height: 50px;        
+}
