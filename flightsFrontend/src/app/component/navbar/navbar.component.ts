@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { from, Observable } from 'rxjs';
 
 import { AirportService } from '../../service/airport.service';
@@ -10,6 +10,7 @@ import { FlightData } from '../../model/flightData/flight-data';
 import { map, tap, debounceTime, distinctUntilChanged, switchMap, flatMap } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { SpinnerService } from 'src/app/service/spinner.service';
 
 interface Adult {
   value: number;
@@ -37,6 +38,8 @@ interface TravelClass {
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
+  showSpinner: boolean;
 
   adults: Adult[] = [
     { value: 1, viewValue: 1 },
@@ -67,11 +70,11 @@ export class NavbarComponent implements OnInit {
   ];
 
   flightsForm = new FormGroup({
-    originLocation: new FormControl(),
-    destinationLocation: new FormControl(),
-    departureDate: new FormControl(),
+    originLocation: new FormControl('', Validators.required),
+    destinationLocation: new FormControl('', Validators.required),
+    departureDate: new FormControl(Validators.required),
     returnDate: new FormControl(),
-    adults: new FormControl(),
+    adults: new FormControl('', Validators.required),
     children: new FormControl(),
     currency: new FormControl(),
     travelClass: new FormControl(),
@@ -82,7 +85,7 @@ export class NavbarComponent implements OnInit {
   airportsArr: Observable<Airport[]>;
   flightData: FlightData;
 
-  constructor(private airportService: AirportService, private flightService: FlightService) { }
+  constructor(private airportService: AirportService, private flightService: FlightService, public spinnerService: SpinnerService) { }
 
   ngOnInit() {    
     this.airportsDep = this.flightsForm.controls.originLocation.valueChanges.pipe(
@@ -96,9 +99,11 @@ export class NavbarComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.flightsForm.valid){
     this.flightService.searchFlights(this.flightsForm.value).subscribe(res => {
       this.flightService.setData(res);
       console.log(res);
+      this.flightsForm.reset();
     });
-  }
+  }}
 }

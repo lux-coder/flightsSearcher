@@ -45,6 +45,7 @@
             <mat-form-field>
                 <mat-label>Adults</mat-label>
                 <mat-select [formControl]="flightsForm.controls.adults">
+                    <mat-option>None</mat-option>
                     <mat-option *ngFor="let adult of adults" [value]="adult.value">
                         {{adult.viewValue}}
                     </mat-option>
@@ -54,6 +55,7 @@
             <mat-form-field>
                 <mat-label>Children</mat-label>
                 <mat-select [formControl]="flightsForm.controls.children">
+                    <mat-option>None</mat-option>
                     <mat-option *ngFor="let child of children" [value]="child.value">
                         {{child.viewValue}}
                     </mat-option>
@@ -95,3 +97,8 @@
 
     </mat-toolbar>
 </form>
+
+<mat-spinner color="accent" class="spinner" [diameter]="300" *ngIf="spinnerService.visibility | async"></mat-spinner>
+
+<mat-spinner color="accent" class="spinner" [diameter]="300" *ngIf="showSpinner"></mat-spinner>
+

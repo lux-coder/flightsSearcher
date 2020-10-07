@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
@@ -13,6 +13,9 @@ import { FlightService } from 'src/app/service/flight.service';
 })
 export class FlightComponent implements OnInit {
   data: FlightData[];
+
+  isShow: boolean;
+  topPosToStartShowing = 100;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -29,14 +32,31 @@ export class FlightComponent implements OnInit {
 
   }
 
-
-
-  ngOnInit() {    
+  ngOnInit() {
     this.flightService.apiData$.subscribe(data => {
       console.log(data);
       this.dataSource = new MatTableDataSource(this.data);
       this.obs = this.dataSource.connect();
       this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
+
+  gotoTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
     });
   }
 

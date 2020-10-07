@@ -14,8 +14,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CacheInterceptor } from './interceptor/cache.interceptor';
 import { CacheService } from './service/cache.service';
+import { CustomHttpInterceptor } from './interceptor/custom-http.interceptor';
 import { AirportService } from './service/airport.service';
 import { FlightService } from './service/flight.service';
+import { SpinnerService } from './service/spinner.service';
 
 @NgModule({
   declarations: [
@@ -36,8 +38,10 @@ import { FlightService } from './service/flight.service';
   providers: [
     AirportService,
     FlightService,
-    CacheService,
-    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }
+    SpinnerService,
+    //CacheService,
+    //{ provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
