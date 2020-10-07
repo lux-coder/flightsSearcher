@@ -10,8 +10,12 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { HomeComponent } from './component/home/home.component';
 
 import { Form, ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { HttpClientModule } from '@angular/common/http';
+import { CacheInterceptor } from './interceptor/cache.interceptor';
+import { CacheService } from './service/cache.service';
+import { AirportService } from './service/airport.service';
+import { FlightService } from './service/flight.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,12 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AirportService,
+    FlightService,
+    CacheService,
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
