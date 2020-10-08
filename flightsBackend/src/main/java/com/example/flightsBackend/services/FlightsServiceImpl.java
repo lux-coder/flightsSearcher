@@ -48,21 +48,6 @@ public class FlightsServiceImpl implements FlightsService {
 
         if (apiResponse == null) {
 
-            String originLocationCode = flight.getOriginLocation().substring(0,3);
-            LOGGER.info("originLocationCode: {}",originLocationCode);
-            String destinationLocationCode = flight.getDestinationLocation().substring(0,3);
-            LOGGER.info("destinationLocationCode: {}",destinationLocationCode);
-            Integer adults = flight.getAdults();
-            LOGGER.info("adults: {}", adults);
-            Integer children = flight.getChildren() == null ? 0 : flight.getChildren();
-            LOGGER.info("children: {}", children);
-            String travelClass = flight.getTravelClass();
-            LOGGER.info("travelClass: {}", travelClass);
-            String currency = flight.getCurrency() == null ? "EUR" : flight.getCurrency();
-            LOGGER.info("currency: {}", currency);
-            Boolean nonStop = flight.getNonStop() == null ? false : flight.getNonStop();
-            LOGGER.info("nonStop: {}", nonStop);
-
             if (flight.getTravelClass() == null && flight.getReturnDate() == null) {
                 flightOffers = withoutClassAndDate(flight);
             } else if (flight.getReturnDate() == null) {

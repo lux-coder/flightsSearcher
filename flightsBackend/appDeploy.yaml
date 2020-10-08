@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: flightsbackend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flightsbackend
+  template:
+    metadata:
+      labels:
+        app: flightsbackend
+    spec:
+      containers:
+      - name: flightsbackend:v1
+        image: gcr.io/flightsearcher1234/flightsbackend:v1
+        imagePullPolicy: Always
+        ports:
+        -  containerPort: 8080
