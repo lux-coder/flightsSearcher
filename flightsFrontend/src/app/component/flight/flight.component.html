@@ -21,11 +21,11 @@
                 <tbody>
                     <tr>
                         <td>{{card.itineraries[0].segments[0].departure.iataCode}}</td>
-                        <td>{{card.itineraries[0].segments[0].departure.at}}</td>
-                        <td>{{card.itineraries[0].segments[0].duration}}</td>
+                        <td>{{card.itineraries[0].segments[0].departure.at | date:'dd MMM yyyy @ HH:mm'}} </td>
+                        <td>{{card.itineraries[0].segments[0].duration | slice : 2}}</td>
                         <td>{{card.itineraries[0].segments[0].arrival.terminal}}</td>
                         <td>{{card.itineraries[0].segments[0].arrival.iataCode}}</td>
-                        <td>{{card.itineraries[0].segments[0].arrival.at}}</td>
+                        <td>{{card.itineraries[0].segments[0].arrival.at | date:'dd MMM yyyy @ HH:mm'}}</td>
                         <td>{{card.itineraries[0].segments[0].numberOfStops}}</td>
                     </tr>
                 </tbody>
@@ -54,11 +54,11 @@
                     <tbody>
                         <tr>
                             <td>{{card.itineraries[1].segments[0].departure.iataCode}}</td>
-                            <td>{{card.itineraries[1].segments[0].departure.at}}</td>
-                            <td>{{card.itineraries[1].segments[0].duration}}</td>
+                            <td>{{card.itineraries[1].segments[0].departure.at | date:'dd MMM yyyy @ HH:mm'}}</td>
+                            <td>{{card.itineraries[1].segments[0].duration | slice : 2}}</td>
                             <td>{{card.itineraries[1].segments[0].arrival.terminal}}</td>
                             <td>{{card.itineraries[1].segments[0].arrival.iataCode}}</td>
-                            <td>{{card.itineraries[1].segments[0].arrival.at}}</td>
+                            <td>{{card.itineraries[1].segments[0].arrival.at | date:'dd MMM yyyy @ HH:mm'}}</td>
                             <td>{{card.itineraries[1].segments[0].numberOfStops}}</td>
                         </tr>
                     </tbody>
@@ -67,22 +67,23 @@
             </mat-card-content>
         </ng-container>
         <mat-divider></mat-divider>
-        <mat-card-header>
-            <mat-card-title style="margin-top: 12px;">Price</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+        <div style="float: right;">
+            <mat-card-header>
+                <mat-card-title style="margin-top: 12px;">Price</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
 
-            <h3> {{card.price.total}} {{card.price.currency}}</h3>
+                <h3> {{card.price.total}} {{card.price.currency}}</h3>
 
-            <mat-card-actions class="actions">
-                <div></div>
-                <div>
-                    <button mat-raised-button color="primary" class="large">Book flight</button>
-                </div>
-            </mat-card-actions>
+                <mat-card-actions class="actions">
+                    <div></div>
+                    <div>
+                        <button mat-raised-button color="primary" class="large">Book flight</button>
+                    </div>
+                </mat-card-actions>
 
-        </mat-card-content>
-
-    </mat-card>    
+            </mat-card-content>
+        </div>
+    </mat-card>
 </div>
 <button mat-raised-button class="medium" color="accent" *ngIf="isShow" (click)="gotoTop()">Go Top</button>
