@@ -11,6 +11,6 @@ import java.util.List;
 @Repository("airportRepository")
 public interface AirportRepository extends CrudRepository<Airport, Long> {
 
-    @Query(value = "select iata, name, location from airports where iata like %:keyword%", nativeQuery = true)
+    @Query(value = "select iata, name, location, country from airports where iata like %:keyword%", nativeQuery = true)
     List<String> search(@Param("keyword") String keyword);
 }

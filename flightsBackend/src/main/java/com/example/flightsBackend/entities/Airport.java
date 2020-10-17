@@ -15,10 +15,12 @@ public class Airport {
     private String iata;
     private String name;
     private String location;
+    private String country;
 
-    public Airport(String iata, String name, String location){
+    public Airport(String iata, String name, String location, String country){
         this.iata = iata;
         this.name = name;
         this.location = location;
+        this.country = country;
     }
 }
